@@ -9,7 +9,7 @@ public class Player
     public List<int> AllThrows => allThrows;
     private Random randomThrow = new Random();
 
-    public void ThrowAllDice() // generates the random dice throw from 1 to 6
+    public void ThrowAllDice() // Generates the random dice throw from 1 to 6
     {
         for (int i = 1; i <= 6; i++) // here we can set the number of throws (i = 6 for the bonus task)
         {
@@ -22,14 +22,7 @@ public class Player
         Console.WriteLine();
     }
 
-    public void ReturnThrownNumbers() // writes down all the thrown numbers to the console
-    {
-        Console.WriteLine();
-        Console.WriteLine($"You threw the following numbers: {string.Join(", ", allThrows)}. ");
-        Console.WriteLine();
-    }
-
-    public void ClearAllThrows() // clears the allThrows List before the next game
+    public void ClearAllThrows() // Clears the allThrows List before the next game
     {
         allThrows.Clear();
     }
