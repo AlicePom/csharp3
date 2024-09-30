@@ -58,7 +58,7 @@ public class Scoring
 
             if (group.Count >= 3) // Scoring for Three- or More-of-a-Kind
             {
-                Score += (100 * group.Number * koeficient) * Math.Pow(2, (group.Count - 3));
+                Score += 100 * group.Number * koeficient * Math.Pow(2, group.Count - 3);
                 Console.WriteLine($"You scored a {group.Count}-of-a-Kind made of {group.Number}!");
             }
 
@@ -66,7 +66,7 @@ public class Scoring
             {
                 if (group.Number == 1 || group.Number == 5)
                 {
-                    Score += group.Number * 10 * koeficient * group.Count;
+                    Score += 10 * group.Number * koeficient * group.Count;
                     Console.WriteLine($"You scored {group.Count}x number {group.Number}.");
                 }
             }
