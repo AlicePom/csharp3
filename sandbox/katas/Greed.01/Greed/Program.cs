@@ -13,7 +13,7 @@ while (true)
     player.ThrowAllDice();
 
     // Returning thrown numbers (optional function here)
-    player.ReturnThrownNumbers();
+    game.ReturnThrownNumbers(player);
 
     // Scoring - evaluating and returning the score
     scoring.EvaluateScore(player);
