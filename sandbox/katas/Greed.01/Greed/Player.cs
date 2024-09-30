@@ -21,9 +21,4 @@ public class Player
         }
         Console.WriteLine();
     }
-
-    public void ClearAllThrows() // Clears the allThrows List before the next game
-    {
-        allThrows.Clear();
-    }
 }

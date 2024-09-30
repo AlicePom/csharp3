@@ -73,13 +73,6 @@ public class Scoring
         }
     }
 
-    public void ReturnScore() // Returning the score
-    {
-        Console.WriteLine();
-        Console.WriteLine($"Your score is {Score} points!");
-        Console.WriteLine();
-    }
-
     public void ResetScore() // Reseting the score
     {
         Score = 0;

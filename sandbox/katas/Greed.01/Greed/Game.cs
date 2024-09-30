@@ -5,30 +5,36 @@ using System.Threading.Tasks;
 
 public class Game
 {
+    public Manager manager;
     public Player player;
     public Scoring scoring;
 
     public Game()
     {
+        manager = new Manager();
         player = new Player();
         scoring = new Scoring();
     }
 
-    public void IntroduceGame() // Introduces the game to the player
+    public void PlayGame() // Plays the game
     {
-        Console.WriteLine("Hello, this is a press-your-luck dice rolling game called 'Greed'. Let's roll the dice 6 times and earn as many points as possible. Press enter to roll the dice!");
+        // Game introduction
+        manager.IntroduceGame();
+
+        // The dice is thrown by the player
+        player.ThrowAllDice();
+
+        // Thrown numbers are returned (optional function here)
+        manager.ReturnThrownNumbers(player);
+
+        // The score is evaluated and returned
+        scoring.EvaluateScore(player);
+        manager.ReturnScore(scoring);
     }
 
-    public void ReturnThrownNumbers(Player player) // Writes down all the thrown numbers to the console
+    public void RestartGame() /// Restarts/exits the game, clears the Score and the 'allThrows' list
     {
-        Console.WriteLine();
-        Console.WriteLine($"You threw the following numbers: {string.Join(", ", player.AllThrows)}.");
-        Console.WriteLine();
-    }
-
-    public void RestartGame(Player player, Scoring scoring) // Restarts the game, cleans the console and allThrows List, and resets the Score
-    {
-        Console.WriteLine("Would you like to restart the game? To continue, press Enter. To exit the game, please enter 'x' and press Enter.");
+        Console.WriteLine("Would you like to restart the game? To exit the game, please enter 'x' and press Enter. To continue, press Enter.");
         string input = Console.ReadLine();
 
         if (input.ToLower() == "x")
@@ -36,7 +42,7 @@ public class Game
             Environment.Exit(0);
         }
 
-        player.ClearAllThrows();
+        manager.ClearAllThrows(player);
         scoring.ResetScore();
         Console.Clear();
     }
