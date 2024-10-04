@@ -14,9 +14,9 @@ public class Manager
         scoring = new Scoring();
     }
 
-    public void IntroduceGame() // Introduces the gameManager to the player
+    public void IntroduceGame() // Introduces the game to the player
     {
-        Console.WriteLine("Hello, this is a press-your-luck dice rolling game called 'Greed'. Let's roll the dice 6 times and earn as many points as possible. Press enter to roll the dice!");
+        Console.WriteLine("Hello, this is a press-your-luck dice rolling game called 'Greed'. Let's roll the dice 6 times and earn as many points as possible. Press Enter to roll the dice!");
     }
 
     public void ReturnThrownNumbers(Player player) // writes down all the thrown numbers to the console (optional)
@@ -33,7 +33,7 @@ public class Manager
         Console.WriteLine();
     }
 
-    public void ClearAllThrows(Player player) // clears the allThrows List before the next gameManager
+    public void ClearAllThrows(Player player) // clears the allThrows List before the next game starts
     {
         player.AllThrows.Clear();
     }

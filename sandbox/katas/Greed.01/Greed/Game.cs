@@ -34,7 +34,7 @@ public class Game
 
     public void RestartGame() /// Restarts/exits the game, clears the Score and the 'allThrows' list
     {
-        Console.WriteLine("Would you like to restart the game? To exit the game, please enter 'x' and press Enter. To continue, press Enter.");
+        Console.WriteLine("Would you like to restart the game? If yes, press Enter. To exit the game, please enter 'x' and press Enter.");
         string input = Console.ReadLine();
 
         if (input.ToLower() == "x")
@@ -43,7 +43,6 @@ public class Game
         }
 
         manager.ClearAllThrows(player);
-        scoring.ResetScore();
         Console.Clear();
     }
 }
