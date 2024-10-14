@@ -7,11 +7,11 @@ public record ToDoItemUpdateRequestDto(string Name, string Description, bool IsC
     public string Description { get; set; }
     public bool IsCompleted { get; set; }
 
-    public ToDoItem ToDomain(int id)
+    public ToDoItem ToDomain(int toDoItemId)
     {
         return new ToDoItem
         {
-            ToDoItemId = id,
+            ToDoItemId = toDoItemId,
             Name = this.Name,
             Description = this.Description,
             IsCompleted = this.IsCompleted,
