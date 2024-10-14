@@ -80,7 +80,6 @@ public class ToDoItemsController : ControllerBase
     [HttpPut("{toDoItemId:int}")]
     public IActionResult UpdateById(int toDoItemId, [FromBody] ToDoItemUpdateRequestDto request)
     {
-        var item = items.Find(i => i.ToDoItemId == toDoItemId);
         var indexOfOldInstance = items.FindIndex(i => i.ToDoItemId == toDoItemId);
 
         try
