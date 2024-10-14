@@ -139,7 +139,7 @@ public class ToDoItemGetResponseDto
 }
 ```
 
-### ToDoItem.Model ToDoItem
+### ToDoItem.Model ToDoItem - OK
 
 ```csharp
 public class ToDoItem
