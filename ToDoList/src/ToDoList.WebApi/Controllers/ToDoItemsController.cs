@@ -9,7 +9,7 @@ using ToDoList.Domain.Models;
 [Route("api/[controller]")]
 public class ToDoItemsController : ControllerBase
 {
-    private static readonly List<ToDoItem> items = [];
+    public static readonly List<ToDoItem> items = [];
 
     [HttpPost]
     public IActionResult Create(ToDoItemCreateRequestDto request)
@@ -33,13 +33,13 @@ public class ToDoItemsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult Read()
+    public ActionResult<IEnumerable<ToDoItemGetResponseDto>> Read()
     {
         List<ToDoItemGetResponseDto> allToDoItemsList = new List<ToDoItemGetResponseDto>();
 
         try
         {
-            if (items == null)
+            if (items == null || items.Count == 0)
             {
                 return NotFound(); //404
             }
@@ -106,7 +106,7 @@ public class ToDoItemsController : ControllerBase
 
         try
         {
-            if (items == null)
+            if (item == null)
             {
                 return NotFound(); //404
             }
