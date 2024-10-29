@@ -19,7 +19,7 @@ public class GetTests
             Description = "Test description",
             IsCompleted = false
         };
-        ToDoItemsController.items.Add(toDoItem);
+        controller.items.Add(toDoItem);
 
         // Act
         var result = controller.Read();
@@ -40,13 +40,11 @@ public class GetTests
         var controller = new ToDoItemsController();
 
         // Act
-        ToDoItemsController.items.Clear();
+        controller.items.Clear();
         var result = controller.Read();
 
         // Assert
         var resultNotFoundResult = Assert.IsType<NotFoundResult>(result.Result);
         Assert.Equal(404, resultNotFoundResult.StatusCode);
     }
-
-
 }

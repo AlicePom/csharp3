@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using ToDoList.Domain.DTOs;
 using ToDoList.Domain.Models;
 using ToDoList.WebApi.Controllers;
-
-public class DeleteTests
+public class ReadByIdTests
 {
     [Fact]
-    public void Delete_AllItems_ReturnsNoContent()
+    public void ReadById_ValidId_ReturnsItem()
     {
         // Arrange
         var controller = new ToDoItemsController();
@@ -22,15 +21,20 @@ public class DeleteTests
         controller.items.Add(toDoItem);
 
         // Act
-        var result = controller.DeleteById(1);
+        var result = controller.ReadById(toDoItem.ToDoItemId);
 
         // Assert
-        var resultNoContent = Assert.IsType<NoContentResult>(result);
-        Assert.Equal(204, resultNoContent.StatusCode);
+        var resultOkObjectResult = Assert.IsType<OkObjectResult>(result.Result);
+        var returnsItems = Assert.IsType<ToDoItemGetResponseDto>(resultOkObjectResult.Value);
+
+        Assert.Equal(toDoItem.ToDoItemId, returnsItems.ToDoItemId);
+        Assert.Equal(toDoItem.Name, returnsItems.Name);
+        Assert.Equal(toDoItem.Description, returnsItems.Description);
+        Assert.Equal(toDoItem.IsCompleted, returnsItems.IsCompleted);
     }
 
     [Fact]
-    public void Delete_AllItems_ReturnsNotFound()
+    public void ReadById_InvalidId_ReturnsNotFound()
     {
         // Arrange
         var controller = new ToDoItemsController();
@@ -44,10 +48,10 @@ public class DeleteTests
         controller.items.Add(toDoItem);
 
         // Act
-        var result = controller.DeleteById(-1);
+        var invalidId = -1;
+        var result = controller.ReadById(invalidId);
 
         // Assert
-        var resultNotFound = Assert.IsType<NotFoundResult>(result);
-        Assert.Equal(404, resultNotFound.StatusCode);
+        Assert.IsType<NotFoundResult>(result.Result);
     }
 }

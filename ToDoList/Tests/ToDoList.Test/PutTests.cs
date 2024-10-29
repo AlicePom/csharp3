@@ -5,10 +5,10 @@ using ToDoList.Domain.DTOs;
 using ToDoList.Domain.Models;
 using ToDoList.WebApi.Controllers;
 
-public class DeleteTests
+public class PutTests
 {
     [Fact]
-    public void Delete_AllItems_ReturnsNoContent()
+    public void Put_ValidId_ReturnsNoContent()
     {
         // Arrange
         var controller = new ToDoItemsController();
@@ -21,16 +21,21 @@ public class DeleteTests
         };
         controller.items.Add(toDoItem);
 
+        var request = new ToDoItemUpdateRequestDto(
+            Name: "Other test name",
+            Description: "Other test description",
+            IsCompleted: true
+        );
+
         // Act
-        var result = controller.DeleteById(1);
+        var result = controller.UpdateById(toDoItem.ToDoItemId, request);
 
         // Assert
-        var resultNoContent = Assert.IsType<NoContentResult>(result);
-        Assert.Equal(204, resultNoContent.StatusCode);
+        Assert.IsType<NoContentResult>(result);
     }
 
     [Fact]
-    public void Delete_AllItems_ReturnsNotFound()
+    public void Put_InvalidId_ReturnsNotFound()
     {
         // Arrange
         var controller = new ToDoItemsController();
@@ -43,11 +48,17 @@ public class DeleteTests
         };
         controller.items.Add(toDoItem);
 
+        var request = new ToDoItemUpdateRequestDto(
+            Name: "Other test name",
+            Description: "Other test description",
+            IsCompleted: true
+        );
+
         // Act
-        var result = controller.DeleteById(-1);
+        var invalidId = -1;
+        var result = controller.UpdateById(invalidId, request);
 
         // Assert
-        var resultNotFound = Assert.IsType<NotFoundResult>(result);
-        Assert.Equal(404, resultNotFound.StatusCode);
+        Assert.IsType<NotFoundResult>(result);
     }
 }

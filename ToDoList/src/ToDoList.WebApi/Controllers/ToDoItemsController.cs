@@ -9,10 +9,10 @@ using ToDoList.Domain.Models;
 [Route("api/[controller]")]
 public class ToDoItemsController : ControllerBase
 {
-    public static readonly List<ToDoItem> items = [];
+    public readonly List<ToDoItem> items = [];
 
     [HttpPost]
-    public IActionResult Create(ToDoItemCreateRequestDto request)
+    public ActionResult<ToDoItemGetResponseDto> Create(ToDoItemCreateRequestDto request)
     {
         //map to Domain object as soon as possible
         var item = request.ToDomain();
@@ -29,7 +29,10 @@ public class ToDoItemsController : ControllerBase
         }
 
         //respond to client
-        return Created(); //201
+        return CreatedAtAction(
+            nameof(ReadById),
+            new { toDoItemId = item.ToDoItemId },
+            ToDoItemGetResponseDto.FromDomain(item)); //201
     }
 
     [HttpGet]
@@ -59,7 +62,7 @@ public class ToDoItemsController : ControllerBase
     }
 
     [HttpGet("{toDoItemId:int}")]
-    public IActionResult ReadById(int toDoItemId)
+    public ActionResult<ToDoItemGetResponseDto> ReadById(int toDoItemId)
     {
         var item = items.Find(i => i.ToDoItemId == toDoItemId);
         try
@@ -84,7 +87,7 @@ public class ToDoItemsController : ControllerBase
 
         try
         {
-            if (items == null)
+            if (items == null || indexOfOldInstance == -1)
             {
                 return NotFound(); //404
             }

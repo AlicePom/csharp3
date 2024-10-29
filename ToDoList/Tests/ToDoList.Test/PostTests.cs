@@ -9,16 +9,16 @@ public class PostTests
     [Fact]
     public void Create_OneItem_ReturnsCreated()
     {
-        // // Arrange
-        // var controller = new ToDoItemsController();
-        // var request = new ToDoItemCreateRequestDto("Test name", "Test description", false);
+        // Arrange
+        var controller = new ToDoItemsController();
+        controller.items.Clear();
+        var request = new ToDoItemCreateRequestDto("Test name", "Test description", false);
 
-        // // Act
-        // var result = controller.Create(request);
-        // var createdResult = Assert.IsType<CreatedAtActionResult>(result);
+        // Act
+        var result = controller.Create(request);
+        var createdResult = Assert.IsType<CreatedAtActionResult>(result.Result);
 
-        // // Assert
-        // Assert.Equal(201, createdResult.StatusCode);
+        // Assert
+        Assert.Equal(201, createdResult.StatusCode);
     }
-
 }
